@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-flux-jib
+spec:
+  selector:
+    matchLabels:
+      app: java-flux-jib
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: java-flux-jib
+    spec:
+      containers:
+        - name: java-flux-jib
+          image: docker.io/khalilkhalef/java-flux-jib
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: java-flux-jib
+spec:
+  selector:
+    app: java-flux-jib
+  ports:
+    - name: "8080"
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
