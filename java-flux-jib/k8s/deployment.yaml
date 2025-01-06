@@ -15,6 +15,6 @@ spec:
       containers:
         - name: java-flux-jib
           image: docker.io/khalilkhalef/java-flux-jib
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
