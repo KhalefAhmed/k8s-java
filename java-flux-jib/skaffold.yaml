@@ -15,9 +15,3 @@ portForward:
     resourceName: java-flux-jib
     port: 8080
     localPort: 8080
-profiles:
-  - name: dev
-    patches:
-      - op: replace
-        path: /build/local/push
-        value: false
