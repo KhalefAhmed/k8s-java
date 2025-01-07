@@ -1,9 +1,14 @@
-FROM maven:3 AS build
-COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean package
+FROM maven:3 AS builder
+WORKDIR /app
+
+COPY target/java-flux-1.0.0-SNAPSHOT.jar app.jar
+RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM openjdk:21-slim
-COPY --from=build /usr/src/app/target/java-flux*.jar /usr/app/app.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/app/app.jar"]
+WORKDIR /app
+COPY --from=builder /app/dependencies/ ./
+COPY --from=builder /app/snapshot-dependencies/ ./
+COPY --from=builder /app/spring-boot-loader/ ./
+COPY --from=builder /app/application/ ./
+
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]

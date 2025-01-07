@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: java-flux
-          image: akhalef/java-flux:latest
+          image: khalilkhalef/java-flux:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
